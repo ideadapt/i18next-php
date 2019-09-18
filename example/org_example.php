@@ -1,13 +1,10 @@
 <?php
 
-namespace Kopfwelt;
-
-require_once('../src/i18next.php');
+require_once('i18next.php');
 
 try {
 
-	i18next::init('en');
-	i18next::setSubstitutionBracket('{{x}}');
+	i18next::init('en', './translation_subst.json');
 
 }
 catch (Exception $e) {
@@ -24,18 +21,18 @@ function t($key, $variables = array()) {
 
 echo 'common.dog -> ' . t('common.dog');
 
-echo '<br>'.PHP_EOL;
+echo '<br>';
 
 echo 'common.cat { count: 1 } -> ' . t('common.cat', array('count' => 1));
 
-echo '<br>'.PHP_EOL;
+echo '<br>';
 
 echo 'common.cat { count: 2 } -> ' . t('common.cat', array('count' => 2));
 
-echo '<br>'.PHP_EOL;
+echo '<br>';
 
 echo 'common.cat { count: 2, lng: fi } -> ' . t('common.cat', array('count' => 2, 'lng' => 'fi'));
 
 echo '<hr>Array: common.thedoglovers -><br>';
 
-echo str_replace("\n", '<br>'.PHP_EOL, t('common.thedoglovers'));
+echo str_replace("\n", '<br>', t('common.thedoglovers'));

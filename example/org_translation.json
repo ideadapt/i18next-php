@@ -3,8 +3,8 @@
 		"common": {
 			"dog": "dog",
 			"dog_plural": "dogs",
-			"cat": "{{count}} cat",
-			"cat_plural": "{{count}} cats",
+			"cat": "__count__ cat",
+			"cat_plural": "__count__ cats",
 			"thedoglovers":["The Dog Lovers by Spike Milligan",
 "So they bought you",
 "And kept you in a",
@@ -30,8 +30,8 @@
 		"common": {
 			"dog": "koira",
 			"dog_plural": "koiraa",
-			"cat": "{{count}} kissa",
-			"cat_plural": "{{count}} kissaa"
+			"cat": "__count__ kissa",
+			"cat_plural": "__count__ kissaa"
 		}
 	}
 }
