@@ -9,7 +9,7 @@
  * ----------------------------------------------------------------------------
  */
 
-namespace Kopfwelt;
+namespace Ganti;
 
 use Exception;
 
