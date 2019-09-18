@@ -2,6 +2,7 @@
     "name": "ganti/i18next-php",
     "description": "PHP class for basic i18next functionality.",
     "homepage": "https://github.com/ganti/i18next-php",
+    "version": "v7.0.1",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "authors": [
