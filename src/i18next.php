@@ -91,6 +91,8 @@ class i18next {
 
     /**
      * Change default praefix and suffix of the variable subsituttion
+     * 
+     * @param string $substitutionBracket New substitution bracket
      */
     public static function setSubstitutionBracket($substitutionBracket) {
         if (strpos('x', $substitutionBracket) !== false) {
