@@ -3,6 +3,7 @@
     "description": "PHP class for basic i18next functionality.",
     "homepage": "https://github.com/ganti/i18next-php",
     "minimum-stability": "dev",
+    "version": "dev-master",
     "prefer-stable": true,
     "authors": [
         {
