@@ -64,10 +64,14 @@ class i18next {
      * @param string $language Locale language code
      * @param string $path Path to locale json files
      */
-    public static function init($language = 'en', $path = null){
+    public static function init($language = 'en', $path = null, $substitutionBracket = null){
 
         self::$_language = $language;
         self::$_path = $path;
+
+        if($substitutionBracket != null){
+            self::setSubstitutionBracket($substitutionBracket);
+        }
 
         self::loadTranslation();
 
@@ -165,7 +169,7 @@ class i18next {
         if(!$return){
             $return = $key;
         }
-        
+
         //Substitution Brackets
         $substitutionBracket = explode('x', self::$_subsituteBracketPattern);
         foreach ($variables as $variable => $value){
