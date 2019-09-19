@@ -5,7 +5,7 @@
 			"dog_plural": "dogs",
 			"cat": "{{count}} cat",
 			"cat_plural": "{{count}} cats",
-			"cat_plural_0": "no cats",
+			"cat_plural_0": "0 cats",
 			"elephant": "{{count}} elephant",
 			"elephant_0": "no elephants",
 			"elephant_2": "{{count}} elephants",

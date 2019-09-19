@@ -141,14 +141,10 @@ class i18next {
      */
     public static function getTranslation($key, $variables = array()){
 
-        if(!is_array($variables) && is_int($variables)){
-
-        //if $variables is an int convert it into $variables 
+        //if $variables is not an array, assume it is count 
         if(!is_array($variables)){
-
             $intCount = $variables;
-            $variables = array();
-            $variables['count'] = $intCount;
+            $variables = array('count' => $intCount);
         }
 
         //check if $variables['count] is int
