@@ -8,30 +8,41 @@
 			"cat_plural_0": "0 cats",
 			"elephant": "{{count}} elephant",
 			"elephant_0": "no elephants",
-			"elephant_2": "{{count}} elephants"
+			"elephant_2": "{{count}} elephants",
+			"spiderWithCount" : "{{count}} spider",
+			"spiderWithCount_plural" : "{{count}} spiders"
+		},
+		"people":{
+			"friend" : "A friend",
+			"friend_female" : "A girlfriend",
+			"friend_female_plural" : "{{count}} girlfriends",
+			"friend_male" : "A boyfriend",
+			"friend_male_0" : "no boyfriend",
+			"friend_male_plural_100" : "100 boyfriends"
 		},
 		"common": {
-			"name_age" : "{{name}} is {{age}} years old",	
-			"friend" : "A friend",
-			"thedoglovers":["The {{animal}} Lovers by Spike Milligan",
-"So they bought you",
-"And kept you in a",
-"Very good home",
-"Cental heating",
-"TV",
-"A deep freeze",
-"A very good home-",
-"No one to take you",
-"For that lovely long run-",
-"But otherwise",
-"'A very good home'",
-"They fed you Pal and Chun",
-"But not that lovely long run,",
-"Until, mad with energy and boredom",
-"You escaped- and ran and ran and ran",
-"Under a car.",
-"Today they will cry for you-",
-"Tomorrow they will but another {{animal}}."]
+			"name_age" : "{{name}} is {{age}} years old"
+		},
+		"multiline":{
+			"poem":["The {{animal}} Lovers by Spike Milligan",
+					"So they bought you",
+					"And kept you in a",
+					"Very good home",
+					"Cental heating",
+					"TV",
+					"A deep freeze",
+					"A very good home-",
+					"No one to take you",
+					"For that lovely long run-",
+					"But otherwise",
+					"'A very good home'",
+					"They fed you Pal and Chun",
+					"But not that lovely long run,",
+					"Until, mad with energy and boredom",
+					"You escaped- and ran and ran and ran",
+					"Under a car.",
+					"Today they will cry for you-",
+					"Tomorrow they will but another {{animal}}."]
 		}
 	},
 	"fi": {
@@ -39,10 +50,13 @@
 			"dog": "koira",
 			"dog_plural": "koiraa",
 			"cat": "{{count}} kissa",
-			"cat_plural": "{{count}} kissaa"
+			"cat_plural": "{{count}} kissaa",
+			"elephant": "{{count}} norsu",
+			"elephant_0": "nolla norsuja",
+			"elephant_2": "{{count}} norsua"
 		},
 		"common": {
-			"name_age" : "{{name}} is {{age}} years old"
+			"name_age" : "{{name}} on {{age}}-vuotias"
 		}
 	}
 }
