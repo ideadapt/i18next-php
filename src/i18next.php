@@ -141,6 +141,16 @@ class i18next {
      */
     public static function getTranslation($key, $variables = array()){
 
+        if(!is_array($variables) && is_int($variables)){
+
+        //if $variables is an int convert it into $variables 
+        if(!is_array($variables)){
+
+            $intCount = $variables;
+            $variables = array();
+            $variables['count'] = $intCount;
+        }
+
         $return = self::_getKey($key, $variables);
 
         // Log missing translation
