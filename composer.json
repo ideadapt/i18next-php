@@ -16,8 +16,11 @@
         {
             "name": "Simon Gantenbein",
             "email": "ganti@users.noreply.github.com"
+        },
+        {
+            "name": "Ueli Kunz",
+            "email": "ideadapt@users.noreply.github.com"
         }
-
     ],
     "require": {
         "php": ">=5.5.0",
@@ -27,5 +30,8 @@
         "psr-4": {
             "Ganti\\": "src"
         }
+    },
+    "scripts": {
+        "test": "phpunit tests"
     }
 }

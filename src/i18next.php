@@ -66,7 +66,7 @@ class i18next {
      */
     public static function init($language = 'en', $path = null) {
 
-        self::$_language = $language;
+        self::$_language = $language ?: 'en';
         self::$_path = $path;
         self::loadTranslation();
     }
@@ -280,7 +280,6 @@ class i18next {
 
         // path traversal - last array will be response
         $paths_arr = explode('.', $key);
-
         while ($path = array_shift($paths_arr)) {
 
             if (array_key_exists($path, $translation) && is_array($translation[$path]) && count($paths_arr) > 0) {
@@ -301,13 +300,11 @@ class i18next {
                 // Request is plural form
                 // TODO: implement more complex i18next handling
                 if (array_key_exists('count', $variables)) {
-
                     if ($variables['count'] != 1 && array_key_exists($path . '_plural_' . $variables['count'], $translation))
-                        $path = $path . '_plural' . $variables['count'];
+                        $path = $path . '_plural_' . $variables['count'];
 
                     else if ($variables['count'] != 1 && array_key_exists($path . '_plural', $translation))
                         $path = $path . '_plural';
-
                 }
 
                 $return = $translation[$path];

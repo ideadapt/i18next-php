@@ -1,3 +1,8 @@
 {
-  "key": "en"
+  "key": "en",
+  "dog": "a dog",
+  "dog_plural_2": "two dogs (__count__)",
+  "dog_plural": "many dogs (__count__)",
+  "dog_curly": "a dog",
+  "dog_curly_plural": "many curly dogs ({{count}})"
 }
