@@ -29,8 +29,6 @@ echo '<br>'.PHP_EOL.PHP_EOL. 	'animal.cat { count: 2, lng: fi } -> ' . t('animal
 echo '<br>'.PHP_EOL.PHP_EOL. 	'common.name_age { name: Elisa, age: 32 } -> ' . t('common.name_age', array('name' => "Elisa", "age" => 32));
 
 echo PHP_EOL.PHP_EOL.			'<hr>Array: multiline.poem -><br>'.PHP_EOL;
-echo 							str_replace("\n", '<br>', t('multiline.poem', array('animal' => 'cat')));
+echo 							str_replace("\n", '<br>', t('multiline.dog_poem', ['animal' => 'dog']));
 echo '<br>'.PHP_EOL.PHP_EOL;
 
-
-print_r(i18next::getTranslation('multiline.poem', ['returnObjectTrees' => true, 'animal' => 'dog']));

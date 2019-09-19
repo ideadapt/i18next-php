@@ -183,11 +183,12 @@ class i18next {
             $return = $key;
         }
 
-        //Substitution Brackets
-        $substitutionBracket = explode('x', self::$_subsituteBracketPattern);
-        foreach ($variables as $variable => $value){
-            if(is_string($value) || is_numeric($value))
-                    $return = preg_replace('/'.$substitutionBracket[0] . $variable . $substitutionBracket[1] . '/', $value, $return);
+        $bracket = explode('x', self::$_subsituteBracketPattern);
+        foreach ($variables as $key => $value){
+            if(is_string($value) || is_numeric($value)){
+                    $regex_pattern = '/'.$bracket[0].$key.$bracket[1].'/';
+                    $return = preg_replace($regex_pattern, $value, $return);
+            }
         }
 
         return $return;
@@ -311,11 +312,18 @@ class i18next {
         }
 
         if(is_array($return) && isset($variables['returnObjectTrees']) && $variables['returnObjectTrees'] === true){
-            $return = $return;
+            $return = $return; /*
+            $j = count($return);
+            for($i = 0; $i < $j ; $i++) {
+                $return[i] = self::substiuteValueFromVariables($return[i], $variables);
+            }
+            */
         }else if(is_array($return) && array_keys($return) === range(0, count($return) - 1)){
             $return = implode("\n", $return);
+
         }else if(is_array($return)){
             return false;
+
         }
 
         return $return;
