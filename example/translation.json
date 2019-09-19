@@ -1,11 +1,19 @@
 {
 	"en": {
-		"common": {
+		"animal":{
 			"dog": "dog",
 			"dog_plural": "dogs",
-			"cat": "__count__ cat",
-			"cat_plural": "__count__ cats",
-			"thedoglovers":["The Dog Lovers by Spike Milligan",
+			"cat": "{{count}} cat",
+			"cat_plural": "{{count}} cats",
+			"cat_plural_0": "0 cats",
+			"elephant": "{{count}} elephant",
+			"elephant_0": "no elephants",
+			"elephant_2": "{{count}} elephants"
+		},
+		"common": {
+			"name_age" : "{{name}} is {{age}} years old",	
+			"friend" : "A friend",
+			"thedoglovers":["The {{animal}} Lovers by Spike Milligan",
 "So they bought you",
 "And kept you in a",
 "Very good home",
@@ -23,15 +31,18 @@
 "You escaped- and ran and ran and ran",
 "Under a car.",
 "Today they will cry for you-",
-"Tomorrow they will but another dog."]
+"Tomorrow they will but another {{animal}}."]
 		}
 	},
 	"fi": {
-		"common": {
+		"animal":{
 			"dog": "koira",
 			"dog_plural": "koiraa",
-			"cat": "__count__ kissa",
-			"cat_plural": "__count__ kissaa"
+			"cat": "{{count}} kissa",
+			"cat_plural": "{{count}} kissaa"
+		},
+		"common": {
+			"name_age" : "{{name}} is {{age}} years old"
 		}
 	}
 }
