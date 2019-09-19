@@ -292,14 +292,18 @@ class i18next {
                     }
                 }
 
-                // Request is plural form
-                // TODO: implement more complex i18next handling
+                // Plural handling: ( key_plural_2 | key_plural | key_2 )
                 if(array_key_exists('count', $variables)){
-                    if($variables['count'] != 1 && array_key_exists($path . '_' . $variables['count'], $translation)){
-                        $path = $path . '_' . $variables['count'];
-                    }else if($variables['count'] != 1 && array_key_exists($path . '_plural', $translation)){
+                    if($variables['count'] != 1 && array_key_exists($path.'_plural_'.$variables['count'], $translation)){
+                        $path = $path . '_plural_'.$variables['count'];
+
+                    }else if($variables['count'] != 1 && array_key_exists($path.'_plural', $translation)){
                         $path = $path . '_plural';
+
+                    }else if($variables['count'] != 1 && array_key_exists($path.'_'.$variables['count'], $translation)){
+                        $path = $path . '_' . $variables['count'];
                     }
+
                 }
 
                 $return = $translation[$path];
