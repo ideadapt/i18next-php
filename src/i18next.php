@@ -13,10 +13,10 @@ namespace Ganti;
 
 use Exception;
 
- /*
-  * extending translate json definitions for arrays
-  * <github.com/JosefMor->
-  */
+/*
+ * extending translate json definitions for arrays
+ * <github.com/JosefMor->
+ */
 
 class i18next {
 
@@ -64,11 +64,17 @@ class i18next {
      * @param string $language Locale language code
      * @param string $path Path to locale json files
      */
-    public static function init($language = 'en', $path = null) {
+    public static function init($language = 'en', $path = null, $substitutionBracket = null){
 
         self::$_language = $language ?: 'en';
         self::$_path = $path;
+
+        if($substitutionBracket != null){
+            self::setSubstitutionBracket($substitutionBracket);
+        }
+
         self::loadTranslation();
+
     }
 
     /**
@@ -78,13 +84,11 @@ class i18next {
      * @param string $language New default language
      * @param string $fallback Fallback language
      */
-    public static function setLanguage($language, $fallback = null) {
-
+    public static function setLanguage($language, $fallback = null){
         self::$_language = $language;
-
-        if (!empty($fallback))
+        if(!empty($fallback)){
             self::$_fallbackLanguage = $fallback;
-
+        }
     }
 
     /**
@@ -92,15 +96,13 @@ class i18next {
      *
      * @param string $substitutionBracket New substitution bracket
      */
-    public static function setSubstitutionBracket($substitutionBracket) {
-        if (strpos('x', $substitutionBracket) !== false) {
+    public static function setSubstitutionBracket($substitutionBracket){
+        if(strpos('x', $substitutionBracket) !== false){
             throw new Exception('_subsituteBracketPattern does not contain an x, e.g __x__');
             $return = false;
-
         } else {
             self::$_subsituteBracketPattern = $substitutionBracket;
             $return = true;
-
         }
 
         return $return;
@@ -111,10 +113,8 @@ class i18next {
      *
      * @return array Missing translations
      */
-    public static function getMissingTranslations() {
-
+    public static function getMissingTranslations(){
         return self::$_missingTranslation;
-
     }
 
     /**
@@ -123,15 +123,13 @@ class i18next {
      * @param string $key Key for translation
      * @return boolean Stating the result
      */
-    public static function existTranslation($key) {
-
+    public static function existTranslation($key){
         $return = self::_getKey($key);
-
-        if ($return)
+        if($return){
             $return = true;
+        }
 
         return $return;
-
     }
 
     /**
@@ -141,43 +139,57 @@ class i18next {
      * @param array $variables Variables
      * @return mixed Translated string or array
      */
-    public static function getTranslation($key, $variables = array()) {
+    public static function getTranslation($key, $variables = array()){
+
+        //if $variables is not an array, assume it is count
+        if(!is_array($variables)){
+            $intCount = $variables;
+            $variables = array('count' => $intCount);
+        }
+
+        //check if $variables['count] is int
+        if(is_array($variables) && array_key_exists('count', $variables)){
+            if(!is_int($variables['count'])){
+                throw new Exception('variable count must be integer');
+            }
+        }
 
         $return = self::_getKey($key, $variables);
 
         // Log missing translation
-        if (!$return && array_key_exists('lng', $variables))
+        if(!$return && array_key_exists('lng', $variables)){
             array_push(self::$_missingTranslation, array('language' => $variables['lng'], 'key' => $key));
-
-        else if (!$return)
+        }else if(!$return){
             array_push(self::$_missingTranslation, array('language' => self::$_language, 'key' => $key));
+        }
 
         // fallback language check
-        if (!$return && !isset($variables['lng']) && !empty(self::$_fallbackLanguage))
+        if(!$return && !isset($variables['lng']) && !empty(self::$_fallbackLanguage)){
             $return = self::_getKey($key, array_merge($variables, array('lng'=>  self::$_fallbackLanguage)));
+        }
 
-        if (!$return && array_key_exists('defaultValue', $variables))
+        if(!$return && array_key_exists('defaultValue', $variables)){
             $return = $variables['defaultValue'];
+        }
 
-        if ($return && isset($variables['postProcess']) && $variables['postProcess'] === 'sprintf' && isset($variables['sprintf'])) {
-
-            if (is_array($variables['sprintf']))
+        if($return && isset($variables['postProcess']) && $variables['postProcess'] === 'sprintf' && isset($variables['sprintf'])){
+            if(is_array($variables['sprintf']))
                 $return = vsprintf($return, $variables['sprintf']);
-
-            else
-                $return = sprintf($return, $variables['sprintf']);
-
+        }else{
+            $return = sprintf($return, $variables['sprintf']);
         }
 
-        if (!$return)
+        if(!$return){
             $return = $key;
-
-        $substitutionBracket = explode('x', self::$_subsituteBracketPattern);
-        foreach ($variables as $variable => $value) {
-
-            if (is_string($value) || is_numeric($value))
-                    $return = preg_replace('/'.$substitutionBracket[0] . $variable . $substitutionBracket[1] . '/', $value, $return);
         }
+
+        //Substitution Brackets
+        $substitutionBracket = explode('x', self::$_subsituteBracketPattern);
+        foreach ($variables as $variable => $value){
+            if(is_string($value) || is_numeric($value))
+                $return = preg_replace('/'.$substitutionBracket[0] . $variable . $substitutionBracket[1] . '/', $value, $return);
+        }
+
         return $return;
 
     }
@@ -186,73 +198,60 @@ class i18next {
      * Loads translation(s)
      * @throws Exception
      */
-    private static function loadTranslation() {
-
+    private static function loadTranslation(){
         $path = preg_replace('/__(.+?)__/', '*', self::$_path, 2, $hasNs);
-        if (!preg_match('/\.json$/', $path)) {
-
+        if(!preg_match('/\.json$/', $path)){
             $path = $path . 'translation.json';
-
             self::$_path = self::$_path . 'translation.json';
-
         }
 
         $dir = glob($path);
 
-        if (count($dir) === 0)
-            throw new Exception('Translation file not found at "'.$path.'"');
-
-        foreach ($dir as $file) {
-
+        if(count($dir) === 0){
+            throw new Exception('Translation file not found');
+        }
+        foreach ($dir as $file){
             $translation = file_get_contents($file);
             $translation = json_decode($translation, true);
-
-            if ($translation === null)
+            if($translation === null){
                 throw new Exception('Invalid json ' . $file);
+            }
 
-            if ($hasNs) {
-
+            if($hasNs){
                 $regexp = preg_replace('/__(.+?)__/', '(?<$1>.+)?', preg_quote(self::$_path, '/'));
-
                 preg_match('/^' . $regexp . '$/', $file, $ns);
 
-                if (!array_key_exists('lng', $ns))
+                if(!array_key_exists('lng', $ns)){
                     $ns['lng'] = self::$_language;
+                }
 
-                if (array_key_exists('ns', $ns)) {
-
-                    if (array_key_exists($ns['lng'], self::$_translation) && array_key_exists($ns['ns'], self::$_translation[$ns['lng']]))
+                if(array_key_exists('ns', $ns)){
+                    if(array_key_exists($ns['lng'], self::$_translation) && array_key_exists($ns['ns'], self::$_translation[$ns['lng']])){
                         self::$_translation[$ns['lng']][$ns['ns']] = array_merge(self::$_translation[$ns['lng']][$ns['ns']], array($ns['ns'] => $translation));
-
-                    else if (array_key_exists($ns['lng'], self::$_translation))
+                    }else if(array_key_exists($ns['lng'], self::$_translation)){
                         self::$_translation[$ns['lng']] = array_merge(self::$_translation[$ns['lng']], array($ns['ns'] => $translation));
-
-                    else
+                    }else{
                         self::$_translation[$ns['lng']] = array($ns['ns'] => $translation);
+                    }
 
-                }
-                else {
-
-                    if (array_key_exists($ns['lng'], self::$_translation))
+                }else {
+                    if(array_key_exists($ns['lng'], self::$_translation)){
                         self::$_translation[$ns['lng']] = array_merge(self::$_translation[$ns['lng']], $translation);
-
-                    else
+                    }else{
                         self::$_translation[$ns['lng']] = $translation;
+                    }
 
                 }
 
-            }
-            else {
-                if (array_key_exists(self::$_language, $translation))
+            }else{
+                if(array_key_exists(self::$_language, $translation)){
                     self::$_translation = $translation;
-
-                else
+                }else{
                     self::$_translation = array_merge(self::$_translation, $translation);
+                }
 
             }
-
         }
-
     }
 
     /**
@@ -265,72 +264,61 @@ class i18next {
      * @param array $variables Variables
      * @return mixed Translated string or array if requested. False if translation doesn't exist
      */
-    private static function _getKey($key, $variables = array()) {
-
+    private static function _getKey($key, $variables = array()){
         $return = false;
 
-        if (array_key_exists('lng', $variables) && array_key_exists($variables['lng'], self::$_translation))
+        if(array_key_exists('lng', $variables) && array_key_exists($variables['lng'], self::$_translation)){
             $translation = self::$_translation[$variables['lng']];
-
-        else if (array_key_exists(self::$_language, self::$_translation))
+        }else if(array_key_exists(self::$_language, self::$_translation)){
             $translation = self::$_translation[self::$_language];
-
-        else
+        }else{
             $translation = array();
+        }
 
         // path traversal - last array will be response
         $paths_arr = explode('.', $key);
-        while ($path = array_shift($paths_arr)) {
-
-            if (array_key_exists($path, $translation) && is_array($translation[$path]) && count($paths_arr) > 0) {
-
+        while ($path = array_shift($paths_arr)){
+            if(array_key_exists($path, $translation) && is_array($translation[$path]) && count($paths_arr) > 0){
                 $translation = $translation[$path];
-
-            }
-            else if (array_key_exists($path, $translation)) {
-
+            }else if(array_key_exists($path, $translation)){
                 // Request has context
-                if (array_key_exists('context', $variables)) {
-
-                    if (array_key_exists($path . '_' . $variables['context'], $translation))
+                if(array_key_exists('context', $variables)){
+                    if(array_key_exists($path . '_' . $variables['context'], $translation)){
                         $path = $path . '_' . $variables['context'];
-
+                    }
                 }
 
-                // Request is plural form
-                // TODO: implement more complex i18next handling
-                if (array_key_exists('count', $variables)) {
-                    if ($variables['count'] != 1 && array_key_exists($path . '_plural_' . $variables['count'], $translation))
-                        $path = $path . '_plural_' . $variables['count'];
+                // Plural handling: ( key_plural_2 | key_plural | key_2 )
+                if(array_key_exists('count', $variables)){
+                    if($variables['count'] != 1 && array_key_exists($path.'_plural_'.$variables['count'], $translation)){
+                        $path = $path . '_plural_'.$variables['count'];
 
-                    else if ($variables['count'] != 1 && array_key_exists($path . '_plural', $translation))
+                    }else if($variables['count'] != 1 && array_key_exists($path.'_plural', $translation)){
                         $path = $path . '_plural';
+
+                    }else if($variables['count'] != 1 && array_key_exists($path.'_'.$variables['count'], $translation)){
+                        $path = $path . '_' . $variables['count'];
+                    }
+
                 }
 
                 $return = $translation[$path];
-
                 break;
-
-            }
-            else {
-
+            }else{
                 return false;
-
             }
 
         }
 
-        if (is_array($return) && isset($variables['returnObjectTrees']) && $variables['returnObjectTrees'] === true)
+        if(is_array($return) && isset($variables['returnObjectTrees']) && $variables['returnObjectTrees'] === true){
             $return = $return;
-
-        else if (is_array($return) && array_keys($return) === range(0, count($return) - 1))
+        }else if(is_array($return) && array_keys($return) === range(0, count($return) - 1)){
             $return = implode("\n", $return);
-
-        else if (is_array($return))
+        }else if(is_array($return)){
             return false;
+        }
 
         return $return;
-
     }
 
 }
