@@ -1,4 +1,5 @@
 <?php
+namespace Ganti\i18next\Test;
 
 use Ganti\i18next;
 use PHPUnit\Framework\TestCase;
@@ -8,7 +9,6 @@ final class I18nextTest extends TestCase {
     function dir(){ return __DIR__.'/'; }
 
     // File & Language
-
     public function testWithDefaults_loadsTranslationFileWithNamespaceEN() {
         i18next::init(null, $this->dir());
         $this->assertEquals('empty', i18next::getTranslation('key'));

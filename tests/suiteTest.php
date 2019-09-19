@@ -5,7 +5,7 @@ namespace Ganti\i18next\Test;
 use PHPUnit\Framework\TestCase;
 use Ganti\i18next;
 
-final class i18nextTest extends TestCase {
+final class suiteTest extends TestCase {
 
     private function setupTest() {
         i18next::init('en', 'example/', '{{x}}');
