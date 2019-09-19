@@ -68,9 +68,7 @@ class i18next {
 
         self::$_language = $language;
         self::$_path = $path;
-
         self::loadTranslation();
-
     }
 
     /**
@@ -91,7 +89,7 @@ class i18next {
 
     /**
      * Change default praefix and suffix of the variable subsituttion
-     * 
+     *
      * @param string $substitutionBracket New substitution bracket
      */
     public static function setSubstitutionBracket($substitutionBracket) {
@@ -191,7 +189,6 @@ class i18next {
     private static function loadTranslation() {
 
         $path = preg_replace('/__(.+?)__/', '*', self::$_path, 2, $hasNs);
-
         if (!preg_match('/\.json$/', $path)) {
 
             $path = $path . 'translation.json';
@@ -203,12 +200,11 @@ class i18next {
         $dir = glob($path);
 
         if (count($dir) === 0)
-            throw new Exception('Translation file not found');
+            throw new Exception('Translation file not found at "'.$path.'"');
 
         foreach ($dir as $file) {
 
             $translation = file_get_contents($file);
-
             $translation = json_decode($translation, true);
 
             if ($translation === null)
@@ -247,7 +243,6 @@ class i18next {
 
             }
             else {
-
                 if (array_key_exists(self::$_language, $translation))
                     self::$_translation = $translation;
 
