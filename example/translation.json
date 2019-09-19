@@ -1,6 +1,6 @@
 {
 	"en": {
-		"common": {
+		"animal":{
 			"dog": "dog",
 			"dog_plural": "dogs",
 			"cat": "{{count}} cat",
@@ -8,8 +8,11 @@
 			"cat_plural_0": "0 cats",
 			"elephant": "{{count}} elephant",
 			"elephant_0": "no elephants",
-			"elephant_2": "{{count}} elephants",
-			"name_age" : "{{name}} is {{age}} years old",
+			"elephant_2": "{{count}} elephants"
+		},
+		"common": {
+			"name_age" : "{{name}} is {{age}} years old",	
+			"friend" : "A friend",
 			"thedoglovers":["The {{animal}} Lovers by Spike Milligan",
 "So they bought you",
 "And kept you in a",
@@ -32,11 +35,14 @@
 		}
 	},
 	"fi": {
-		"common": {
+		"animal":{
 			"dog": "koira",
 			"dog_plural": "koiraa",
 			"cat": "{{count}} kissa",
 			"cat_plural": "{{count}} kissaa"
+		},
+		"common": {
+			"name_age" : "{{name}} is {{age}} years old"
 		}
 	}
 }
