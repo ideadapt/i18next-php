@@ -151,6 +151,13 @@ class i18next {
             $variables['count'] = $intCount;
         }
 
+        //check if $variables['count] is int
+        if(is_array($variables) && array_key_exists('count', $variables)){
+            if(!is_int($variables['count'])){
+                throw new Exception('variable count must be integer');
+            }
+        }
+        
         $return = self::_getKey($key, $variables);
 
         // Log missing translation
