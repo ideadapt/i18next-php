@@ -48,10 +48,10 @@ final class I18nextTest extends TestCase {
     // Brackets && Variables
     public function testBrackets_ChangeToCurly() {
         i18next::init('en', $this->dir().'translation-__lng__.json');
-        i18next::setSubstitutionBracket('{{x}}');
+        i18next::setSubstitutionBracket('__x__');
         // a _plural key can only exist, if its singular key (without _plural suffix) exists.
-        $this->assertEquals('a dog', i18next::getTranslation('dog_curly'));
-        $this->assertEquals('many curly dogs (300)', i18next::getTranslation('dog_curly', array('count' => 300)));
+        $this->assertEquals('a dog', i18next::getTranslation('dog_underline'));
+        $this->assertEquals('many underline dogs (300)', i18next::getTranslation('dog_underline', array('count' => 300)));
     }
 }
 

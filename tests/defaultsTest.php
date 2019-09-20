@@ -1,10 +1,8 @@
 <?php
-
 namespace Ganti\i18next\Test;
+
 use Ganti\i18next;
-
 use PHPUnit\Framework\TestCase;
-
 
 final class suiteTest extends TestCase {
 
@@ -20,10 +18,7 @@ final class suiteTest extends TestCase {
     public function testBasics() {
         $this->setupTest();
 
-        // Simple
         $this->assertSame('dog', i18next::getTranslation('animal.dog'));
-
-        // With count
         $this->assertSame('1 spider', i18next::getTranslation('animal.spiderWithCount', ['count' => 1]));
 
     }
