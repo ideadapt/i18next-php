@@ -13,10 +13,10 @@ namespace Ganti;
 
 use Exception;
 
- /*
-  * extending translate json definitions for arrays
-  * <github.com/JosefMor->
-  */
+/*
+ * extending translate json definitions for arrays
+ * <github.com/JosefMor->
+ */
 
 class i18next {
 
@@ -66,7 +66,7 @@ class i18next {
      */
     public static function init($language = 'en', $path = null, $substitutionBracket = null){
 
-        self::$_language = $language;
+        self::$_language = $language ?: 'en';
         self::$_path = $path;
 
         if($substitutionBracket != null){
@@ -93,7 +93,7 @@ class i18next {
 
     /**
      * Change default praefix and suffix of the variable subsituttion
-     * 
+     *
      * @param string $substitutionBracket New substitution bracket
      */
     public static function setSubstitutionBracket($substitutionBracket){
@@ -141,7 +141,7 @@ class i18next {
      */
     public static function getTranslation($key, $variables = array()){
 
-        //if $variables is not an array, assume it is count 
+        //if $variables is not an array, assume it is count
         if(!is_array($variables)){
             $intCount = $variables;
             $variables = array('count' => $intCount);
@@ -153,7 +153,7 @@ class i18next {
                 throw new Exception('variable count must be integer');
             }
         }
-        
+
         $return = self::_getKey($key, $variables);
 
         // Log missing translation
@@ -175,9 +175,9 @@ class i18next {
         if($return && isset($variables['postProcess']) && $variables['postProcess'] === 'sprintf' && isset($variables['sprintf'])){
             if(is_array($variables['sprintf']))
                 $return = vsprintf($return, $variables['sprintf']);
-            }else{
-                $return = sprintf($return, $variables['sprintf']);
-            }
+        }else{
+            $return = sprintf($return, $variables['sprintf']);
+        }
 
         if(isset($variables['returnObjectTrees']) && $variables['returnObjectTrees'] === true){
             $return = explode("\n", $return);
@@ -246,7 +246,7 @@ class i18next {
                     }else{
                         self::$_translation[$ns['lng']] = $translation;
                     }
-                    
+
                 }
 
             }else{

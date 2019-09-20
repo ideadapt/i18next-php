@@ -76,7 +76,8 @@ You can have html content written with multilines in JSON File
 }
 ```
 
-# phpunit
-```bash
-./vendor/bin/phpunit --bootstrap vendor/autoload.php tests
-```
+# Development
+
+## Run Tests
+
+`composer test`
