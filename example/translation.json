@@ -1,5 +1,8 @@
 {
 	"en": {
+		"common": {
+			"name_age" : "{{name}} is {{age}} years old"
+		},
 		"animal":{
 			"dog": "dog",
 			"dog_plural": "dogs",
@@ -8,41 +11,40 @@
 			"cat_plural_0": "0 cats",
 			"elephant": "{{count}} elephant",
 			"elephant_0": "no elephants",
-			"elephant_2": "{{count}} elephants"
+			"elephant_2": "{{count}} elephants",
+			"spiderWithCount" : "{{count}} spider",
+			"spiderWithCount_plural" : "{{count}} spiders",
+			"spiderWithCount_plural_0" : "no spiders"
 		},
-		"common": {
-			"name_age" : "{{name}} is {{age}} years old",	
+		"people":{
 			"friend" : "A friend",
-			"thedoglovers":["The {{animal}} Lovers by Spike Milligan",
-"So they bought you",
-"And kept you in a",
-"Very good home",
-"Cental heating",
-"TV",
-"A deep freeze",
-"A very good home-",
-"No one to take you",
-"For that lovely long run-",
-"But otherwise",
-"'A very good home'",
-"They fed you Pal and Chun",
-"But not that lovely long run,",
-"Until, mad with energy and boredom",
-"You escaped- and ran and ran and ran",
-"Under a car.",
-"Today they will cry for you-",
-"Tomorrow they will but another {{animal}}."]
+			"friend_female" : "A girlfriend",
+			"friend_female_plural" : "{{count}} girlfriends",
+			"friend_male" : "A boyfriend",
+			"friend_male_0" : "no boyfriend",
+			"friend_male_plural_100" : "100 boyfriends"
+		},
+		"multiline":{
+			"poem_kafka":["There are only two things.",
+						"{{truth}} and {{lies}}.",
+						"{{truth}} is indivisible",
+						"hence it cannot recognize itself;",
+						"anyone who wants to recognize it has to be a {{lie}}."
+			]
 		}
 	},
 	"fi": {
+		"common": {
+			"name_age" : "{{name}} on {{age}}-vuotias"
+		},
 		"animal":{
 			"dog": "koira",
 			"dog_plural": "koiraa",
 			"cat": "{{count}} kissa",
-			"cat_plural": "{{count}} kissaa"
-		},
-		"common": {
-			"name_age" : "{{name}} is {{age}} years old"
+			"cat_plural": "{{count}} kissaa",
+			"elephant": "{{count}} norsu",
+			"elephant_0": "nolla norsuja",
+			"elephant_2": "{{count}} norsua"
 		}
 	}
 }
