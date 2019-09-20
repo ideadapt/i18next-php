@@ -8,6 +8,8 @@ PHP class for basic [i18next](https://github.com/jamuhl/i18next) functionality.
 - Support for [context](http://i18next.com/pages/doc_features.html#context)
 - Support for [basic sprintf](http://i18next.com/pages/doc_features.html#sprintf)
 - Support for [basic plural forms](http://i18next.com/pages/doc_features.html#plurals)
+- Missing interval plurals
+
 - Support for [multiline in JSON](http://i18next.com/pages/doc_features.html)
 
 ## Usage
