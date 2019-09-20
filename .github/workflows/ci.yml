@@ -1,0 +1,15 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install
+      run: composer install
+    - name: Run PHPUnit Tests
+      run: composer test
