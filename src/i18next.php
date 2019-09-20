@@ -36,7 +36,7 @@ class i18next {
      * defines the praefix and suffix of the variable subsituttion
      * @var string subsituttion bracket pattern
      */
-    private static $_subsituteBracketPattern = '__x__';
+    private static $_subsituteBracketPattern = '{{x}}';
 
     /**
      * Fallback language for translations not found in current language
@@ -179,10 +179,15 @@ class i18next {
                 $return = sprintf($return, $variables['sprintf']);
             }
 
+        if(isset($variables['returnObjectTrees']) && $variables['returnObjectTrees'] === true){
+            $return = explode("\n", $return);
+        }
+
         if(!$return){
             $return = $key;
         }
 
+        //Substitute Brackets with Values
         $bracket = explode('x', self::$_subsituteBracketPattern);
         foreach ($variables as $key => $value){
             if(is_string($value) || is_numeric($value)){
@@ -311,14 +316,7 @@ class i18next {
 
         }
 
-        if(is_array($return) && isset($variables['returnObjectTrees']) && $variables['returnObjectTrees'] === true){
-            $return = $return; /*
-            $j = count($return);
-            for($i = 0; $i < $j ; $i++) {
-                $return[i] = self::substiuteValueFromVariables($return[i], $variables);
-            }
-            */
-        }else if(is_array($return) && array_keys($return) === range(0, count($return) - 1)){
+        if(is_array($return) && array_keys($return) === range(0, count($return) - 1)){
             $return = implode("\n", $return);
 
         }else if(is_array($return)){
